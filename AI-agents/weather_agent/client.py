@@ -25,18 +25,15 @@ PROVIDERS = [
     )
 ]
 
-def select_provider()-> Provider:
+def select_provider() -> Provider:
     for provider in PROVIDERS:
         if os.getenv(provider.env_var):
             return provider
-    raise RuntimeError(f"No Provider Found")
+    needed = ", ".join(p.env_var for p in PROVIDERS)
+    raise RuntimeError(f"No provider found. Set one of: {needed} in your .env")
 
 
-def get_client_and_model()->tuple[OpenAI,str,Provider]:
+def get_client_and_model() -> tuple[OpenAI, str, Provider]:
     provider = select_provider()
-    api_key  = os.getenv(provider.env_var)
-    if provider.base_url in None:
-        client = OpenAI(api_key=api_key)
-    else:
-        client = OpenAI(api_key=api_key,base_url=provider.base_url)
-    return client,provider.model,provider
+    client = OpenAI(api_key=os.getenv(provider.env_var), base_url=provider.base_url)
+    return client, provider.model, provider
