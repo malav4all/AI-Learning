@@ -13,6 +13,7 @@ version = "0.1.0"
 source = { editable = "." }
 dependencies = [
     { name = "ipykernel" },
+    { name = "jinja2" },
     { name = "openai" },
     { name = "pip" },
     { name = "python-dotenv" },
@@ -23,6 +24,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "ipykernel", specifier = ">=7.3.0" },
+    { name = "jinja2", specifier = ">=3.1.6" },
     { name = "openai", specifier = ">=1.0" },
     { name = "pip", specifier = ">=26.3" },
     { name = "python-dotenv", specifier = ">=1.2.2" },
